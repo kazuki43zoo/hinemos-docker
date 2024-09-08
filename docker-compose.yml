@@ -1,0 +1,34 @@
+services:
+  operation-manager:
+    build: ./manager/
+    volumes:
+      - operation-data:/opt/hinemos/var/data/
+    hostname: operation-manager
+    networks:
+      operation_net:
+        ipv4_address: 172.22.0.3
+    ports:
+      - 80:80
+  monitoring-agent:
+    build: ./agent/
+    hostname: monitoring-agent
+    networks:
+      operation_net:
+        ipv4_address: 172.22.0.2
+  monitoring-agent-java:
+    build: ./agent-with-java/
+    hostname: monitoring-agent-java
+    networks:
+      operation_net:
+        ipv4_address: 172.22.0.4
+
+volumes:
+  operation-data:
+
+networks:
+  operation_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.22.0.0/24
+ 
