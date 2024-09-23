@@ -32,4 +32,4 @@ COPY ./run.sh /opt/hinemos_agent/.
 COPY --from=builder /tmp/build/target/demo.jar /opt/ap/demo.jar
 
 
-ENTRYPOINT ["sh", "-c", "/opt/hinemos_agent/run.sh && /etc/alternatives/jre_21/bin/java -jar /opt/ap/demo.jar | tee /var/log/demo-console.log"]
+ENTRYPOINT ["sh", "-c", "/opt/hinemos_agent/run.sh && /etc/alternatives/jre_21/bin/java -verbose:gc -Xms64m -Xmx64m -jar /opt/ap/demo.jar | tee /var/log/demo-console.log"]
